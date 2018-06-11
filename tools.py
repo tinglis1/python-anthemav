@@ -8,6 +8,7 @@ import anthemav
 __all__ = ('console', 'monitor')
 
 
+
 @asyncio.coroutine
 def console(loop, log):
     """Connect to receiver and show events as they occur.
@@ -21,9 +22,10 @@ def console(loop, log):
     :param verbose:
         Show debug logging.
     """
+    print("Tools Console")
     parser = argparse.ArgumentParser(description=console.__doc__)
-    parser.add_argument('--host', default='127.0.0.1', help='IP or FQDN of AVR')
-    parser.add_argument('--port', default='14999', help='Port of AVR')
+    parser.add_argument('--host', default='192.168.2.200', help='IP or FQDN of AVR')
+    parser.add_argument('--port', default='4999', help='Port of AVR')
     parser.add_argument('--verbose', '-v', action='count')
 
     args = parser.parse_args()

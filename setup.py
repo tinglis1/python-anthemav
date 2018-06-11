@@ -14,15 +14,15 @@ if len(long_description) < 100:
     print("\n***\n***\nWARNING: %s\n***\n***\n" % long_description)
 
 setup(
-    name='anthemav',
-    version='1.1.8',
-    author='David McNett',
-    author_email='nugget@macnugget.org',
-    url='https://github.com/nugget/python-anthemav',
+    name='anthemav_x00',
+    version='0.0.0',
+    author='Tim Inglis',
+    author_email='tinglis1@gmail.com',
+    url='https://github.com/tinglis1/python-anthemav',
     license="LICENSE",
-    packages=['anthemav'],
+    packages=['anthemav_x00'],
     scripts=[],
-    description='Python API for controlling Anthem Receivers',
+    description='Python API for controlling x00 Anthem Receivers',
     long_description=long_description,
     classifiers=[
         'Development Status :: 5 - Production/Stable',

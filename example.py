@@ -2,7 +2,7 @@
 
 import argparse
 import asyncio
-import anthemav
+import anthemav_x00
 import logging
 
 log = logging.getLogger(__name__)
@@ -10,8 +10,8 @@ log = logging.getLogger(__name__)
 @asyncio.coroutine
 def test():
     parser = argparse.ArgumentParser(description=test.__doc__)
-    parser.add_argument('--host', default='127.0.0.1', help='IP or FQDN of AVR')
-    parser.add_argument('--port', default='14999', help='Port of AVR')
+    parser.add_argument('--host', default='192.168.2.200', help='IP or FQDN of AVR')
+    parser.add_argument('--port', default='4999', help='Port of AVR')
     parser.add_argument('--verbose', '-v', action='count')
 
     args = parser.parse_args()
@@ -31,7 +31,7 @@ def test():
 
     log.info('Connecting to Anthem AVR at %s:%i' % (host, port))
 
-    conn = yield from anthemav.Connection.create(host=host,port=port,loop=loop,update_callback=log_callback)
+    conn = yield from anthemav_x00.Connection.create(host=host,port=port,loop=loop,update_callback=log_callback)
 
     log.info('Power state is '+str(conn.protocol.power))
     conn.protocol.power = True
@@ -39,13 +39,19 @@ def test():
 
     yield from asyncio.sleep(2, loop=loop)
 
-    log.info('Panel brightness (raw) is '+str(conn.protocol.panel_brightness))
-    log.info('Panel brightness (text) is '+str(conn.protocol.panel_brightness_text))
+    log.info('Volume is '+str(conn.protocol.volume_as_percentage))
+    log.info('Input is '+str(conn.protocol.input_name))
+    log.info('Input is '+str(conn.protocol.mute))
+    # log.info('Source is '+str(conn.protocol.video_input_resolution_text))
 
-    log.info('Video resolution (text) is '+str(conn.protocol.video_input_resolution_text))
-    log.info('Audio input channels (text) is '+str(conn.protocol.audio_input_channels_text))
-    log.info('Audio input format (text) is '+str(conn.protocol.audio_input_format_text))
-    log.info('Audio listening mode (text) is '+str(conn.protocol.audio_listening_mode_text))
+
+    # log.info('Panel brightness (raw) is '+str(conn.protocol.panel_brightness))
+    # log.info('Panel brightness (text) is '+str(conn.protocol.panel_brightness_text))
+    #
+    # log.info('Video resolution (text) is '+str(conn.protocol.video_input_resolution_text))
+    # log.info('Audio input channels (text) is '+str(conn.protocol.audio_input_channels_text))
+    # log.info('Audio input format (text) is '+str(conn.protocol.audio_input_format_text))
+    # log.info('Audio listening mode (text) is '+str(conn.protocol.audio_listening_mode_text))
 
 if __name__ == '__main__':
     logging.basicConfig(level=logging.DEBUG)
